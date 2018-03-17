@@ -1,0 +1,97 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+html {
+    font-size: 10px;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: Helvetica,  Arial,sans-serif
+}
+
+body {
+    font-size: 1.2rem;
+    line-height: 1.2;
+    background: #fff;
+    position: relative;
+}
+
+main {
+    height: calc(100vh - 40px);
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    /* ios弹性滚动 */
+}
+
+main>section {
+    display: none;
+}
+
+main>section:nth-child(1) {
+    display: block;
+}
+
+.item {
+    border-bottom: 0.1rem solid #ccc;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.item>a {
+    display: block;
+    display: flex;
+}
+
+.item.cover,
+.item img {
+    width: 7rem;
+}
+
+.item .detail {
+    flex: 1;
+    padding-left: 1.6rem;
+}
+
+.item .detail h2 {
+    font-size: 1.6rem;
+}
+
+.item .detail .extra {
+    color: #999;
+    margin-top: 0.5rem;
+}
+
+.item .detail .score {
+    color: #ff5722;
+}
+
+footer {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    height: 4rem;
+    width: 100%;
+    border-top: 0.1rem solid rgb(230, 227, 227);
+    background: #fff;
+}
+
+footer>div {
+    flex: 1;
+    text-align: center;
+}
+
+footer>div>span {
+    display: block;
+    padding-bottom: 0.4rem;
+}
+
+footer .active {
+    color: #ff5722;
+}
