@@ -1,42 +1,49 @@
 $('footer>div').on('click', function() {
     let index = $(this).index()
-    $('section')
-        .hide()
-        .eq(index)
-        .fadeIn()
-    $(this)
-        .addClass('active')
-        .siblings()
-        .removeClass('active')
+    $('section').hide().eq(index).fadeIn()
+    $(this).addClass('active').siblings().removeClass('active')
 })
 let index = 0
-
+let isLoading = false
 ajax()
 
-$('main').scroll(function () { 
-    if ($('section').eq(0).height()-10<=$('main').scrollTop()+$('main').height()) {
-    ajax()
+var clock = undefined
+$('main').scroll(function () {
+    if (clock) {
+        clearTimeout(clock)
     }
- })
+    clock = setTimeout(() => {
+        if ($('section').eq(0).height() - 10 <= $('main').scrollTop() + $('main').height()) {
+            ajax()
+        }
+    }, 600)
+})
 
 function ajax() {
+    if (isLoading) {
+        return
+    }
+    isLoading = true
+    $('.loading').show()
     $.ajax({
         type: 'GET',
         url: 'http://api.douban.com/v2/movie/top250',
         data: {
             start: index,
-            count:  20
+            count: 20
         },
         dataType: 'jsonp'
     })
-        .done(function (ret) {
-            console.dir(ret);
-            setData(ret);
-            index += 20;
+        .done(function(ret) {
+            setData(ret)
+            index += 20//刚开始0~20，20~40 40~60...
         })
-        .fail(function () {
-            console.log('error');
-        });
+        .fail(function(data) {
+            console.log(data)
+        }).always(function () { 
+            isLoading = false
+            $('.loading').hide()
+         })
 }
 
 function setData(data) {
@@ -66,7 +73,6 @@ function setData(data) {
         $node.find('.collect').text(movie.collect_count)
         $node.find('.year').text(movie.year)
         $node.find('.type').text(movie.genres.join('/'))
-        $node.find('.director').text(movie.directors[0].name)
         $node.find('.director').text(function() {
             let directorArr = []
             movie.directors.forEach(item => {
@@ -82,8 +88,6 @@ function setData(data) {
             return actorArr.join('、')
         })
 
-        $('section')
-            .eq(0)
-            .append($node)
+        $('#top250').append($node)
     })
 }

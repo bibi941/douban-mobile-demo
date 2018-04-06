@@ -3,7 +3,7 @@
     margin: 0;
     box-sizing: border-box;
 }
-a{
+a {
     text-decoration: none;
 }
 html {
@@ -13,7 +13,7 @@ html {
 html,
 body {
     height: 100%;
-    font-family: Helvetica,  Arial,sans-serif
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -30,21 +30,21 @@ main {
     /* ios弹性滚动 */
 }
 
-main>section {
+main > section {
     display: none;
 }
 
-main>section:nth-child(1) {
+main > section:nth-child(1) {
     display: block;
 }
-
+/* 面板样式 */
 .item {
     border-bottom: 0.1rem solid #ccc;
     padding-top: 2rem;
     padding-bottom: 1rem;
 }
 
-.item>a {
+.item > a {
     display: block;
     display: flex;
 }
@@ -71,7 +71,25 @@ main>section:nth-child(1) {
 .item .detail .score {
     color: #ff5722;
 }
+.loading {
+    text-align: center;
+    padding: 5px;
+    display: none;
+}
+.loading .iconfont {
+    display: inline-block;
+    animation: 1s rotate linear infinite;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
+/* 底部样式 */
 footer {
     display: flex;
     position: absolute;
@@ -82,12 +100,12 @@ footer {
     background: #fff;
 }
 
-footer>div {
+footer > div {
     flex: 1;
     text-align: center;
 }
 
-footer>div>span {
+footer > div > span {
     display: block;
     padding-bottom: 0.4rem;
 }
