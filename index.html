@@ -13,17 +13,23 @@
 
 <body>
     <main>
-        <div id="top250">
-            <section>
-            
-            </section>
-        </div>
+        <section id="top250"></section>
+
+        <section id="beimei"></section>
+
+        <section id="search">
+            <div class="search-area">
+                <input type="text" placeholder="搜索电影">
+                <span class="button"> 搜索</span>
+            </div>
+            <div class="search-result">
+               
+            </div>
+        </section>
+
         <div class="loading">
             <span class="iconfont icon-loading"></span>
         </div>
-        <section>2</section>
-        <section>3</section>
-      
     </main>
     <footer>
         <div class="active">
@@ -33,7 +39,8 @@
         </div>
         <div>
             <span class="iconfont icon-beimei">
-            </span>北美</span>
+            </span>
+            <span>北美</span>
         </div>
         <div>
             <span class="iconfont icon-search">
@@ -42,7 +49,36 @@
         </div>
     </footer>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-    <script src="./js/main.js">
+    <script src="./js/top250.js"></script>
+    <script src="./js/beimei.js"></script>
+    <script src="./js/search.js"></script>
+    <script>
+        //footer切换
+        {
+            let view = {}
+            let model = {}
+            let controller = {
+                init(view, model) {
+                    this.view = view
+                    this.model = model
+                    this.bindEvent()
+                },
+                bindEvent() {
+                    $('footer>div').on('click', function () {
+                        let index = $(this).index()
+                        $('main>section')
+                            .hide()
+                            .eq(index)
+                            .fadeIn()
+                        $(this)
+                            .addClass('active')
+                            .siblings()
+                            .removeClass('active')
+                    })
+                }
+            }
+            controller.init(view, model)
+        }
     </script>
 </body>
 

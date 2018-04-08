@@ -5,15 +5,16 @@ $('footer>div').on('click', function() {
 })
 let index = 0
 let isLoading = false
+var clock = undefined
 ajax()
 
-var clock = undefined
 $('main').scroll(function () {
     if (clock) {
         clearTimeout(clock)
     }
+ 
     clock = setTimeout(() => {
-        if ($('section').eq(0).height() - 10 <= $('main').scrollTop() + $('main').height()) {
+        if ($('section').eq(0).height() - 100 <= $('main').scrollTop() + $('main').height()) {
             ajax()
         }
     }, 600)
@@ -34,8 +35,8 @@ function ajax() {
         },
         dataType: 'jsonp'
     })
-        .done(function(ret) {
-            setData(ret)
+        .done(function(data) {
+            setData(data)
             index += 20//刚开始0~20，20~40 40~60...
         })
         .fail(function(data) {
